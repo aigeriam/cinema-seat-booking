@@ -1,13 +1,17 @@
 package booking
 
-import "errors"
+import (
+	"errors"
+	"time"
+)
 
 type Booking struct {
-	ID      string
-	UserID  string
-	MovieID string
-	SeatID  string
-	Status  string
+	ID        string
+	UserID    string
+	MovieID   string
+	SeatID    string
+	Status    string
+	ExpiresAt time.Time
 }
 
 // for dependency injection
