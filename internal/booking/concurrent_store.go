@@ -22,7 +22,7 @@ func (s *ConcurrentStore) Book(b Booking) error {
 	s.bookings[b.SeatID] = b
 	return nil
 }
-func (s ConcurrentStore) ListBookings(movieID string) []Booking {
+func (s *ConcurrentStore) ListBookings(movieID string) []Booking {
 	s.RLock()
 	defer s.RUnlock() //other go routines can read the data
 

@@ -1,6 +1,7 @@
 package booking
 
 import (
+	"context"
 	"errors"
 	"time"
 )
@@ -16,10 +17,13 @@ type Booking struct {
 
 // for dependency injection
 type BookingStore interface {
-	Book(b Booking) error
+	Book(b Booking) (Booking, error)
 	ListBookings(movieID string) []Booking
+	Confirm(ctx context.Context, sessionId string, userID string) (Booking, error)
+	Release(ctx context.Context, sessionId string, userID string) error
 }
 
 var (
-	ErrSeatAlreadyBooked = errors.New("The seat is already booked")
+	ErrSeatAlreadyBooked      = errors.New("The seat is already booked")
+	ErrSeatWasntHoldToConfirm = errors.New("The seat wasnt hold to be confirmed")
 )
